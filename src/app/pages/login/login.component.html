@@ -1,0 +1,14 @@
+<app-navigation></app-navigation>
+<form class="login">
+    <div>
+        <label for="login">{{ "login" | translate}}</label>
+        <input type="text" id="login" name="login">
+    </div>
+    <div>
+        <label for="password">{{ "password" | translate}}</label>
+        <input type="text" id="password" name="login">
+    </div>
+    <button type="submit" id="login">{{ "LogIn" | translate}}</button>
+    <button id="cancel" (click)="openStartPage()">{{ "cancel" | translate}}</button>
+</form>
+<app-footer></app-footer>

@@ -1,0 +1,37 @@
+<app-navigation></app-navigation>
+<form class="admin">
+    <fieldset>
+        <legend>{{ "changeName" | translate}}</legend>
+        <div>
+            <label for="login">{{ "newlogin" | translate}}</label>
+            <input type="text" id="login" name="login">
+        </div>
+        <div>
+            <label for="name">{{ "newname" | translate}}</label>
+            <input type="text" id="name" name="name">
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>{{ "changePassword" | translate}}</legend>
+        <div>
+            <label for="newPassword">{{ "newpassword" | translate}}</label>
+            <input type="text" id="newPassword" name="newPassword">
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>{{ "oldpassword" | translate}}</legend>
+        <div class="password">
+            <label for="password">{{ "password" | translate}}</label>
+            <input type="password" id="password" name="password">
+        </div>
+
+    </fieldset>
+
+    <button>{{ "save" | translate}}</button>
+    <button>{{ "cancel" | translate}}</button>
+
+</form>
+<button class="removeAcc">{{ "removeUser" | translate }}</button>
+<app-footer></app-footer>

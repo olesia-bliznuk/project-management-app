@@ -1,0 +1,41 @@
+:host {
+    display: flex;
+    justify-content: space-between;
+    background-color: #44b78b;
+    padding: 10px;
+    font-size: 20px;
+    margin: 0;
+}
+
+.footer-img {
+    height: 50px;
+}
+
+.git-link {
+    display: flex;
+    text-decoration: none;
+}
+
+.git-link p:hover {
+    color: #0d5530;
+}
+
+.git-link .footer-img {
+    margin-right: 10px;
+}
+
+.git-link p {
+    line-height: 10px;
+    color: black;
+}
+
+@media (max-width: 700px) {
+    :host {
+        padding: 5px;
+        font-size: 14px;
+    }
+
+    .git-link p {
+        line-height: 25px;
+    }
+}
