@@ -1,0 +1,18 @@
+<app-navigation></app-navigation>
+<form class="login">
+    <div>
+        <label for="login">{{ "login" | translate}}</label>
+        <input type="text" id="login" name="login" [(ngModel)]="userLogin">
+    </div>
+    <div>
+        <label for="name">{{ "name" | translate}}</label>
+        <input type="text" id="name" name="name" [(ngModel)]="userName" required>
+    </div>
+    <div>
+        <label for="password">{{ "password" | translate}}</label>
+        <input type="password" id="password" name="password" required [(ngModel)]="userPassword">
+    </div>
+    <button type="submit" (click)="registratin()">{{ "SignUp" | translate}}</button>
+    <button (click)="openStartPage()">{{ "cancel" | translate}}</button>
+</form>
+<app-footer></app-footer>
