@@ -1,0 +1,43 @@
+.boards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 20px 30px;
+    gap: 10px;
+    min-height: 75vh;
+}
+
+h2{
+    font-size: 27px;
+    margin: 0;
+}
+
+.boards div{
+    border: #44b78b 2px solid;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+p{
+    font-size: 20px;
+}
+
+@media (max-width: 900px) {
+
+    .boards {
+        grid-template-columns:  1fr;
+        margin: 10px 15px;
+    }
+
+    h2{
+        font-size: 23px;
+        margin: 0;
+    }
+    
+    .boards div{
+        padding: 15px;
+    }
+    
+    p{
+        font-size: 17px;
+    }
+}

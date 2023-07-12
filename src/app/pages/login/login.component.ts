@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { RestApiService } from 'src/app/services/restapi.service';
 
 @Component({
   selector: 'app-login',
@@ -8,11 +9,19 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  constructor(private router: Router) {
+  userLogin: string = "";
+  userPassword: string = "";
+
+  constructor(private router: Router,
+    public restapi: RestApiService) {
   }
 
   openStartPage(): void {
     this.router.navigate(['']);
+  }
+
+  signIn(): void{
+    this.restapi.signIn(this.userLogin, this.userPassword);
   }
 
 }
