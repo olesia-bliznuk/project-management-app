@@ -20,6 +20,19 @@ export class RestApiService {
       }
     ).subscribe((response) => {
       this.response = response;
+      // if (this.response)
+      console.log(this.response);
+    })
+  }
+
+  public signIn(userLogin: string, userPassword: string): void{
+    this.http.post('http://0.0.0.0:3000/auth/signin',
+      {
+        "login": userLogin,
+        "password": userPassword,
+      }
+    ).subscribe((response) => {
+      this.response = response;
       console.log(this.response);
     })
   }

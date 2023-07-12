@@ -31,7 +31,8 @@ export class NavigationComponent {
     this.translateService.use(lang); // Изменение языка
   }
 
-  openAdminPage(): void {
-    this.router.navigate(['admin']);
-  }
+  // openAdminPage(): void {
+  //   // this.router.navigate(['admin']);
+  //   this.router.navigate(['boards']);
+  // }
 }

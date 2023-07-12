@@ -14,6 +14,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { BoardComponent } from './pages/boards/boards.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -30,7 +31,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     RegistrationComponent,
     StartPageComponent,
     LoginComponent,
-    AdministrationComponent
+    AdministrationComponent,
+    BoardComponent
   ],
   imports: [
     BrowserModule,

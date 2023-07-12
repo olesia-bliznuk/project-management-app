@@ -21,5 +21,11 @@
   "newlogin": "New Login",
   "newname": "New Name",
   "newpassword": "New Password",
-  "oldpassword": "Enter current password"
+  "oldpassword": "Enter current password",
+  "noprojects": "No projects",
+  "otherProjects": "Other projects",
+  "your projects": "Your projects",
+  "invitedProjects": "Projects you were invited to",
+  "alertlogin": "Login must be at least 6 characters long",
+  "alertpassword": "Password must be at least 6 characters long"
   }

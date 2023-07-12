@@ -10,6 +10,9 @@
     padding: 20px;
     min-height: 66vh;
 }
+.login div{
+    margin-top: 10px;
+}
 
 .login label {
     font-size: 20px;
@@ -23,7 +26,7 @@
     width: 280px;
     height: 30px;
     margin-top: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 .login button {
@@ -44,3 +47,26 @@
     color: #44b78b;
     transition: background-color 0.8s ease, color 0.6s ease;
 }
+
+#login.ng-invalid.ng-touched, #password.ng-invalid.ng-touched{
+    border-left: 5px solid #a94442; /* red */
+}
+
+#login.ng-valid,  #password.ng-valid{
+    border-left: 5px solid #42A948; /* green */
+}
+
+.alert {
+    padding: 15px;
+    width: 260px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+  }
+
+  .alert-danger {
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    color: #a94442;
+  }
