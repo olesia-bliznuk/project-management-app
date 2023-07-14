@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { LanguageService } from 'src/app/services/language.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { RestApiService } from 'src/app/services/restapi.service';
 
 
 @Component({
@@ -12,7 +13,8 @@ import { TranslateService } from '@ngx-translate/core';
 export class NavigationComponent {
   constructor(public languageService: LanguageService,
     private router: Router,
-    private translateService: TranslateService) {
+    private translateService: TranslateService,
+    public restapiservice: RestApiService) {
   }
 
   openRegistration(): void {
@@ -31,8 +33,7 @@ export class NavigationComponent {
     this.translateService.use(lang); // Изменение языка
   }
 
-  // openAdminPage(): void {
-  //   // this.router.navigate(['admin']);
-  //   this.router.navigate(['boards']);
-  // }
+  openAdminPage(): void {
+    this.router.navigate(['admin']);
+  }
 }

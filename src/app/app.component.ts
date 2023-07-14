@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent {
   title = 'project-management-app';
+
   constructor(public translate: TranslateService) {
   }
 }
