@@ -1,39 +1,81 @@
 import { transition } from '@angular/animations';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestApiService {
+  token: any;
   response: any;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+    private translateService: TranslateService,
+    private router: Router) {
   }
 
   public registration(userName: string, userLogin: string, userPassword: string): void {
-    this.http.post('http://0.0.0.0:3000/auth/signup',
-      {
-        "name": userName,
-        "login": userLogin,
-        "password": userPassword,
-      }
-    ).subscribe((response) => {
-      this.response = response;
-      // if (this.response)
-      console.log(this.response);
+    fetch('http://0.0.0.0:3000/auth/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: userName,
+        login: userLogin,
+        password: userPassword
+      })
     })
+      .then(response => {
+        if (!response.ok) {
+          if (response.status === 409)
+            Swal.fire(this.translateService.instant('error409'));
+          else
+            Swal.fire(this.translateService.instant('error400'));
+        } else {
+          Swal.fire(this.translateService.instant('registOk'));
+          setTimeout(() => this.router.navigate(['login']), 1000);
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
   }
 
-  public signIn(userLogin: string, userPassword: string): void{
-    this.http.post('http://0.0.0.0:3000/auth/signin',
-      {
-        "login": userLogin,
-        "password": userPassword,
-      }
-    ).subscribe((response) => {
-      this.response = response;
-      console.log(this.response);
+  public signIn(userLogin: string, userPassword: string): void {
+
+
+    fetch('http://0.0.0.0:3000/auth/signin', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        login: userLogin,
+        password: userPassword,
+      })
     })
+      .then(response => {
+        if (!response.ok) {
+          if (response.status === 401)
+            Swal.fire(this.translateService.instant('error401'));
+          else
+            Swal.fire(this.translateService.instant('error400'));
+        } 
+        
+        
+        else {
+          response.json().then(data => {
+            this.token = data.token;
+            this.router.navigate(['']);
+          });
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+    }
   }
-}

@@ -27,5 +27,10 @@
   "your projects": "Your projects",
   "invitedProjects": "Projects you were invited to",
   "alertlogin": "Login must be at least 6 characters long",
-  "alertpassword": "Password must be at least 6 characters long"
+  "alertpassword": "Password must be at least 6 characters long",
+  "alertname": "Name must be at least 6 characters long",
+  "registOk": "You have successfully registered",
+  "error409": "Login already exist",
+  "error400": "Bad Request",
+  "error401": "Authorization error"
   }
