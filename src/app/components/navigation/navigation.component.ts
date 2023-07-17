@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LanguageService } from 'src/app/services/language.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -10,11 +10,15 @@ import { RestApiService } from 'src/app/services/restapi.service';
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.css']
 })
-export class NavigationComponent {
+export class NavigationComponent implements OnInit{
   constructor(public languageService: LanguageService,
     private router: Router,
     private translateService: TranslateService,
     public restapiservice: RestApiService) {
+  }
+
+  ngOnInit(): void {
+    this.restapiservice.autoSignIn();
   }
 
   openRegistration(): void {
@@ -35,5 +39,10 @@ export class NavigationComponent {
 
   openAdminPage(): void {
     this.router.navigate(['admin']);
+  }
+
+  logOut():void{
+    this.restapiservice.deleteAutoSignIn();
+    this.router.navigate(['']);
   }
 }

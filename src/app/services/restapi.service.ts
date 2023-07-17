@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class RestApiService {
   token: any;
+  expirationDate: any;
   response: any;
 
   constructor(private http: HttpClient,
@@ -47,7 +48,6 @@ export class RestApiService {
 
   public signIn(userLogin: string, userPassword: string): void {
 
-
     fetch('http://0.0.0.0:3000/auth/signin', {
       method: 'POST',
       headers: {
@@ -64,18 +64,42 @@ export class RestApiService {
             Swal.fire(this.translateService.instant('error401'));
           else
             Swal.fire(this.translateService.instant('error400'));
-        } 
-        
-        
+        }
+
+
         else {
           response.json().then(data => {
             this.token = data.token;
             this.router.navigate(['']);
+
+            const today = new Date();
+            this.expirationDate = new Date(today);
+            this.expirationDate.setDate(today.getDate() + 5);
+
+            localStorage.setItem('token', this.token);
+            localStorage.setItem('expirationDate', this.expirationDate);
           });
         }
       })
       .catch(error => {
         console.error('Error:', error);
       });
+  }
+
+  public autoSignIn(): void {
+    const storedToken = localStorage.getItem('token');
+    const storedExpirationDate = localStorage.getItem('expirationDate');
+    if (storedToken && storedExpirationDate) {
+      const expirationDate = new Date(storedExpirationDate);
+      if (expirationDate > new Date()) {
+        this.token = storedToken;
+      }
     }
   }
+
+  public deleteAutoSignIn(): void{
+    this.token = "";
+    localStorage.removeItem('token');
+    localStorage.removeItem('expirationDate');
+  }
+}

@@ -32,5 +32,9 @@
   "registOk": "You have successfully registered",
   "error409": "Login already exist",
   "error400": "Bad Request",
-  "error401": "Authorization error"
+  "error401": "Authorization error",
+  "notAllFiels":  "Fill in all the fields",
+  "CreateBoard": "Create board",
+  "LogOut": "Log out",
+  "EditProfile": "Edit Profile"
   }
