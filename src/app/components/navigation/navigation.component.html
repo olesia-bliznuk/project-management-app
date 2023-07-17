@@ -1,17 +1,11 @@
-<nav class="navigation" *ngIf="!this.restapiservice.token">
+<nav class="navigation">
     <h1 (click)="openStartPage()">PMA</h1>
     <div class="container">
         <app-change-lang></app-change-lang>
-        <button class="button" (click)="openRegistration()">{{ "SignUp" | translate}}</button>
-        <button class="button" (click)="openLogin()">{{ "LogIn" | translate}}</button>
-    </div>
-</nav> 
-<nav class="navigation" *ngIf="this.restapiservice.token">
-    <h1 (click)="openStartPage()">PMA</h1>
-    <div class="container">
-        <app-change-lang></app-change-lang>
-        <button>Создать доску</button>
-        <button class="button" (click)="openAdminPage()">редактировать профиль</button>
-        <button>Выйти</button>
+        <button *ngIf="!this.restapiservice.token" class="button" (click)="openRegistration()">{{ "SignUp" | translate}}</button>
+        <button *ngIf="!this.restapiservice.token" class="button" (click)="openLogin()">{{ "LogIn" | translate}}</button>
+        <button *ngIf="this.restapiservice.token" class="button">{{ "CreateBoard" | translate}}</button>
+        <button *ngIf="this.restapiservice.token" class="button" (click)="openAdminPage()">{{ "EditProfile" | translate}}</button>
+        <button *ngIf="this.restapiservice.token" class="button" (click)="logOut()">{{ "LogOut" | translate}}</button>
     </div>
 </nav> 
