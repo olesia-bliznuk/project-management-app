@@ -1,0 +1,13 @@
+<app-navigation></app-navigation>
+<form>
+
+    <div>
+        <label for="title">{{ "title" | translate}}*</label>
+        <input #login="ngModel" required type="text" [(ngModel)]="title" name="title" id="title">
+    </div>
+
+    <!-- <select multiple [(ngModel)]="selectedItems">
+      <option *ngFor="let item of items" [value]="item">{{ item }}</option>
+    </select> -->
+  </form>
+<app-footer></app-footer>

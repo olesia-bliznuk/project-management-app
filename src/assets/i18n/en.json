@@ -36,5 +36,11 @@
   "notAllFiels":  "Fill in all the fields",
   "CreateBoard": "Create board",
   "LogOut": "Log out",
-  "EditProfile": "Edit Profile"
+  "EditProfile": "Edit Profile",
+  "AreYouSure": "Are you sure?",
+  "YesDelete": "Yes, delete it!",
+  "DeleteAcc": "Account has been deleted",
+  "changeInfoOk": "Data changed successfully",
+  "incorrectData": "Incorrect Data",
+  "title": "Title"
   }

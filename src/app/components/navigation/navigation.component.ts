@@ -41,6 +41,10 @@ export class NavigationComponent implements OnInit{
     this.router.navigate(['admin']);
   }
 
+  openCreateBoard(): void {
+    this.router.navigate(['createBoard']);
+  }
+
   logOut():void{
     this.restapiservice.deleteAutoSignIn();
     this.router.navigate(['']);
