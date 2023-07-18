@@ -1,13 +1,14 @@
 <app-navigation></app-navigation>
-<form>
-
+<form class="createBoard">
+    <h2>{{ "CreateBoard" | translate}}</h2>
     <div>
         <label for="title">{{ "title" | translate}}*</label>
         <input #login="ngModel" required type="text" [(ngModel)]="title" name="title" id="title">
+        <div class="alert alert-danger" [hidden]="login.valid || login.pristine || login.untouched">
+            {{ "enterTitle" | translate}}
+        </div>
     </div>
-
-    <!-- <select multiple [(ngModel)]="selectedItems">
-      <option *ngFor="let item of items" [value]="item">{{ item }}</option>
-    </select> -->
+    <button (click)="createBoard()">{{ "create" | translate}}</button>
+    <button (click)="cancel()">{{ "cancel" | translate}}</button>
   </form>
 <app-footer></app-footer>

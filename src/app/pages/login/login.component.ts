@@ -20,7 +20,7 @@ export class LoginComponent {
     this.router.navigate(['']);
   }
 
-  signIn(): void{
+  signIn(): void {
     this.restapi.signIn(this.userLogin, this.userPassword);
   }
 

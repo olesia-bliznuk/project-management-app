@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { RestApiService } from 'src/app/services/restapi.service';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-create-board',
@@ -7,11 +11,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateBoardComponent {
   title: string = '';
-  items: string[] = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'ifewfew', 'ewfweffe'];
-  selectedItems: string[] = [];
 
-  // Можно использовать этот метод, чтобы узнать выбранные элементы
-  onSubmit() {
-    console.log(this.selectedItems);
+  constructor(
+    private router: Router,
+    public restapiservice: RestApiService,
+    private translateService: TranslateService) {
+  }
+
+  cancel() {
+    this.router.navigate(['']);
+  }
+
+  createBoard() {
+    if (this.title){
+      this.restapiservice.createBoard(this.title);
+      this.cancel();
+    }
+    else
+      Swal.fire(this.translateService.instant('enterTitle'));
   }
 }
