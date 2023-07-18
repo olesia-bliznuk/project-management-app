@@ -25,7 +25,7 @@ export class RegistrationComponent {
   }
 
   registratin(): void {
-    if (this.userName && this.userLogin && this.userPassword)
+    if (this.userName.length >= 6  && this.userLogin.length >= 6  && this.userPassword.length >= 6) 
       this.restapi.registration(this.userName, this.userLogin, this.userPassword);
     else
       Swal.fire(this.translateService.instant('notAllFiels'));

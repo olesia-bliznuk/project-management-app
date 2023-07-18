@@ -45,9 +45,7 @@ export class AdministrationComponent {
     }
 
     changeInfo() {
-        if ((this.userName.length >= 6 || this.userName.length === 0) &&
-            (this.userLogin.length >= 6 || this.userLogin.length === 0) &&
-            (this.userPassword.length >= 6 || this.userPassword.length === 0)) {
+        if (this.userName.length >= 6  && this.userLogin.length >= 6  && this.userPassword.length >= 6) {
             this.restapi.changeUserInfo(this.userName, this.userLogin, this.userPassword);
         }
         else {

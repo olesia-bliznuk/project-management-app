@@ -38,13 +38,18 @@
     transition: background-color 0.8s ease, color 0.6s ease;
 }
 
-
-#login.ng-invalid.ng-touched, #password.ng-invalid.ng-touched, #name.ng-invalid.ng-touched{
-    border-left: 5px solid #a94442; /* red */
+#login.ng-invalid.ng-touched,
+#password.ng-invalid.ng-touched,
+#name.ng-invalid.ng-touched {
+    border-left: 5px solid #a94442;
+    /* red */
 }
 
-#login.ng-valid,  #password.ng-valid, #name.ng-valid{
-    border-left: 5px solid #42A948; /* green */
+#login.ng-valid,
+#password.ng-valid,
+#name.ng-valid {
+    border-left: 5px solid #42A948;
+    /* green */
 }
 
 .alert {
@@ -54,10 +59,10 @@
     margin-bottom: 10px;
     border: 1px solid transparent;
     border-radius: 4px;
-  }
+}
 
-  .alert-danger {
+.alert-danger {
     background-color: #f2dede;
     border-color: #ebccd1;
     color: #a94442;
-  }
+}
