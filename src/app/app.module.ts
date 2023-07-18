@@ -17,6 +17,9 @@ import { FormControlDirective, FormsModule } from '@angular/forms';
 import { BoardComponent } from './components/boards/boards.component';
 
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { CreateBoardComponent } from './components/create-board/create-board.component';
+
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -35,7 +38,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     StartPageComponent,
     LoginComponent,
     AdministrationComponent,
-    BoardComponent
+    BoardComponent,
+    CreateBoardComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +57,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpClientModule,
     FormsModule,
     SweetAlert2Module.forRoot(),
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -83,6 +83,29 @@ fieldset {
     margin: 0 auto;
 }
 
+#login.ng-invalid.ng-touched, #password.ng-invalid.ng-touched, #name.ng-invalid.ng-touched,  #newpassword.ng-invalid.ng-touched{
+    border-left: 5px solid #a94442; /* red */
+}
+
+#login.ng-valid,  #password.ng-valid, #name.ng-valid, #newpassword.ng-valid{
+    border-left: 5px solid #42A948; /* green */
+}
+
+.alert {
+    padding: 15px;
+    width: 260px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+  }
+
+  .alert-danger {
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    color: #a94442;
+  }
+
 @media (max-width: 700px) {
 
     .admin {

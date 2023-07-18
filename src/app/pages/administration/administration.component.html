@@ -3,35 +3,39 @@
     <fieldset>
         <legend>{{ "changeName" | translate}}</legend>
         <div>
-            <label for="login">{{ "newlogin" | translate}}</label>
-            <input type="text" id="login" name="login">
+            <label for="login">{{ "login" | translate}}</label>
+            <input #login="ngModel" minlength="6" type="text" [(ngModel)]="userLogin" name="login" id="login">
+            <div class="alert alert-danger" [hidden]="login.valid || login.pristine || login.untouched">
+                {{ "alertlogin" | translate}}
+            </div>
+
         </div>
         <div>
-            <label for="name">{{ "newname" | translate}}</label>
-            <input type="text" id="name" name="name">
+            <label for="name">{{ "name" | translate}}</label>
+            <input #name="ngModel" minlength="6" type="text" id="name" name="name" [(ngModel)]="userName">
+            <div class="alert alert-danger" [hidden]="name.valid || name.pristine || name.untouched">
+                {{ "alertname" | translate}}
+            </div>
         </div>
+
     </fieldset>
 
     <fieldset>
         <legend>{{ "changePassword" | translate}}</legend>
         <div>
-            <label for="newPassword">{{ "newpassword" | translate}}</label>
-            <input type="text" id="newPassword" name="newPassword">
-        </div>
-    </fieldset>
-
-    <fieldset>
-        <legend>{{ "oldpassword" | translate}}</legend>
-        <div class="password">
-            <label for="password">{{ "password" | translate}}</label>
-            <input type="password" id="password" name="password">
+            <label for="password">{{ "newpassword" | translate}}</label>
+            <input #password="ngModel" minlength="6" type="password" id="password" name="password"
+                [(ngModel)]="userPassword">
+            <div class="alert alert-danger" [hidden]="password.valid || password.pristine || password.untouched">
+                {{ "alertpassword" | translate}}
+            </div>
         </div>
 
     </fieldset>
 
-    <button>{{ "save" | translate}}</button>
-    <button>{{ "cancel" | translate}}</button>
+    <button (click)="changeInfo()">{{ "save" | translate}}</button>
+    <button (click)="openStartPage()">{{ "cancel" | translate}}</button>
 
 </form>
-<button class="removeAcc">{{ "removeUser" | translate }}</button>
+<button class="removeAcc" (click)="removeUser()">{{ "removeUser" | translate }}</button>
 <app-footer></app-footer>
