@@ -5,12 +5,9 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { ElementSchemaRegistry } from '@angular/compiler';
+import { map } from 'rxjs/operators';
 
-interface Users {
-  "_id": "string",
-  "name": "string",
-  "login": "string"
-}
+
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +18,7 @@ export class RestApiService {
   expirationDate: any;
   response: any;
   allUsers: any;
+  allBoards: any;
 
   constructor(private http: HttpClient,
     private translateService: TranslateService,
@@ -103,6 +101,7 @@ export class RestApiService {
       const expirationDate = new Date(storedExpirationDate);
       if (expirationDate > new Date()) {
         this.token = storedToken;
+        this.getAllBoards();
       }
     }
   }
@@ -204,7 +203,6 @@ export class RestApiService {
       };
 
       const data = this.http.post(url, userData, { headers }).toPromise();
-      console.log(data);
       Swal.fire({
         icon: 'success',
         title: this.translateService.instant('successBoard'),
@@ -214,8 +212,40 @@ export class RestApiService {
     } catch (error) {
       Swal.fire(this.translateService.instant('error400'));
     }
-
-
   }
+
+  public async getAllBoards() {
+    try {
+      const currentUser = await this.getCurrentUser();
+      const url = `http://0.0.0.0:3000/boardsSet/${currentUser.login}`;
+      const headers = new HttpHeaders({
+        'accept': 'application/json',
+        'Authorization': `Bearer ${this.token}`
+      });
+      const data = await this.http.get(url, { headers }).toPromise()
+      .then(response => {
+        this.allBoards = response;
+      })
+    } catch (error) {
+      Swal.fire(this.translateService.instant('error400'));
+    }
+  }
+
+
+  public deleteBoard(id: string){
+    try {
+      const url = `http://0.0.0.0:3000/boards/${id}`;
+      const headers = new HttpHeaders({
+        'accept': 'application/json',
+        'Authorization': `Bearer ${this.token}`
+      });
+      const data = this.http.delete(url, { headers }).toPromise();
+      this.allBoards = this.allBoards.filter((item: { _id: string; }) => item._id !== id);
+    } catch (error) {
+      Swal.fire(this.translateService.instant('error400'));
+    }
+  }
+
+
 
 }

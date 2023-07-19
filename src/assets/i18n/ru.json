@@ -45,5 +45,9 @@
   "title": "Заголовок",
   "create": "Создать",
   "enterTitle": "Введите заголовок",
-  "successBoard": "Доска успешно создана"
+  "successBoard": "Доска успешно создана",
+  "myBoards": "Мои доски",
+  "deleteBoard": "Удалить доску",
+  "YesDeleteBoard": "Да, удалить доску",
+  "DeleteBoard": "Доска удалена"
   }
