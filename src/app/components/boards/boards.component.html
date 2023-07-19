@@ -1,15 +1,11 @@
-
 <div class="boards">
-    <div>
-        <h2>Your own projects</h2>
-        <p>{{ "noprojects" | translate}}</p>
+    <h2>{{ "myBoards" | translate}}</h2>
+    <div class="boardsGrid">
+        <div (click)="openBoard(item._id)" class="board" *ngFor="let item of restapiservice.allBoards" [id]="item._id">
+            <h3>{{ item.title }}</h3>
+            <hr>
+            <button (click)="deleteBoard($event, item._id)" class="deleteButton">{{ "deleteBoard" | translate}}</button>
+        </div>
     </div>
-    <div>
-        <h2>Projects you were invited to</h2>
-        <p>{{ "noprojects" | translate}}</p>
-    </div>
-    <div>
-        <h2>Other projects</h2>
-        <p>{{ "noprojects" | translate}}</p>
-    </div>
+    <p *ngIf="restapiservice.allBoards && restapiservice.allBoards.length === 0">{{ "noprojects" | translate}}</p>
 </div>

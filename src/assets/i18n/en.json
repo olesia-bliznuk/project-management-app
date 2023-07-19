@@ -45,5 +45,9 @@
   "title": "Title",
   "create": "Create",
   "enterTitle": "Enter title",
-  "successBoard": "Board created successfully"
+  "successBoard": "Board created successfully",
+  "myBoards": "My boards",
+  "deleteBoard": "Delete board",
+  "YesDeleteBoard": "Yes, delete this board!",
+  "DeleteBoard": "Board removed"
   }
