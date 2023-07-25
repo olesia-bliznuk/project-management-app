@@ -14,10 +14,12 @@ import { OpenBoardService } from 'src/app/services/open-board.service';
 export class BoardComponent implements OnInit {
 
   showModal = false;
+  public title?: string;
+  editingTitleBoard = false;
   editedTitleColumn: string = "";
   editingItemId: string | null = null;
+  editedTitleBoard?: string;
   private idBoard?: string;
-  public title?: string;
 
   constructor(private router: Router,
     public openBoardService: OpenBoardService,
@@ -28,6 +30,7 @@ export class BoardComponent implements OnInit {
   ngOnInit(): void {
     this.idBoard = this.openBoardService.getId();
     this.title = this.openBoardService.getTitle();
+    this.editedTitleBoard = this.title;
     if (!this.idBoard) {
       this.openStartPage();
     }
@@ -128,6 +131,25 @@ export class BoardComponent implements OnInit {
     this.editingItemId = itemId;
     this.editedTitleColumn = this.restApiService.allColumns.find((item: { _id: string; }) => item._id === itemId)?.title || '';
   }
+
+  cancelBoardColumn(){
+    this.editingTitleBoard = false;
+  }
+
+  saveTitleBoard(){
+    this.editingTitleBoard = false;
+    if (this.editedTitleBoard){
+      this.restApiService.changeTitleBoard(this.editedTitleBoard);
+      this.title = this.editedTitleBoard;
+    }
+    else
+      Swal.fire(this.translateService.instant('enterTitle'));
+  }
+
+  startEditingTitleBoard(){
+    this.editingTitleBoard = true;
+  }
+
 
 
 }
