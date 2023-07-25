@@ -1,0 +1,150 @@
+.board {
+    min-height: 80vh;
+}
+
+.headerBoard {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 20px 40px 20px;
+}
+
+.titleBoard {
+    font-size: 35px;
+    text-align: center;
+    width: 450px;
+}
+
+button {
+    display: block;
+    width: 200px;
+    height: 50px;
+    border-radius: 7px;
+    border: 2px solid #44b78b;
+    margin-top: 20px;
+    background-color: #44b78b;
+    font-size: 18px;
+    color: #fff;
+}
+
+button:hover {
+    background-color: #fff;
+    color: #44b78b;
+    transition: background-color 0.8s ease, color 0.6s ease;
+    cursor: pointer;
+}
+
+.gridColumns {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 10px;
+}
+
+.columnBoard {
+    border: #44b78b 2px solid;
+    background-color: rgb(68, 183, 139, 0.2);
+    border-radius: 10px;
+    padding: 0px;
+    margin-bottom: 20px;
+}
+
+.titleColumn {
+    background-color: #44b78b;
+    border-radius: 7px;
+    padding-bottom: 15px;
+}
+
+.titleColumn h3 {
+    font-size: 22px;
+    margin: 0;
+    padding: 10px;
+    text-align: center;
+}
+
+.deleteColummn {
+    width: 230px;
+    height: 50px;
+    border-radius: 7px;
+    border: 2px solid #088354;
+    background-color: #fff;
+    font-size: 18px;
+    color: #0d5530;
+    display: block;
+    margin: 15px auto;
+}
+
+.deleteColummn:hover {
+    background-color: #44b78b;
+    color: #fff;
+    transition: background-color 0.8s ease, color 0.6s ease;
+    cursor: pointer;
+}
+
+.createTask {
+    display: block;
+    width: 230px;
+    margin: 20px auto;
+}
+
+.task {
+    background-color: #fff;
+    padding: 10px;
+    font-size: 18px;
+    margin: 10px;
+    border-radius: 10px;
+    border: #44b78b 2px solid;
+}
+
+.task button {
+    width: 120px;
+    height: 30px;
+}
+
+.task h4 {
+    font-size: 20px;
+}
+
+@media (max-width: 980px) {
+    .gridColumns {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+}
+
+@media (max-width: 800px) {
+    .headerBoard {
+        padding: 10px 10px 20px 10px;
+
+    }
+
+    .gridColumns {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .titleBoard {
+        font-size: 30px;
+        width: 400px;
+        margin: 0 15px;
+    }
+}
+
+@media (max-width: 550px) {
+    .headerBoard {
+        padding: 10px 10px 20px 10px;
+        flex-direction: column;
+    }
+
+    .gridColumns {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .titleBoard {
+        font-size: 25px;
+        width: 300px;
+        margin: 20px auto;
+    }
+
+    button {
+        margin: 10px auto;
+    }
+}

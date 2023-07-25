@@ -1,13 +1,13 @@
-h2{
-    font-size:32px;
+h2 {
+    font-size: 32px;
     text-align: center;
 }
 
-h3{
-    font-size:28px;
+h3 {
+    font-size: 28px;
 }
 
-.informationBlock{
+.informationBlock {
     margin: 25px auto;
     padding: 30px;
     width: 65%;
@@ -15,38 +15,38 @@ h3{
     background-color: rgb(68, 183, 139, 0.2);
 }
 
-.informationBlock h3{
+.informationBlock h3 {
     margin: 0;
 }
 
-.informationBlock img{
+.informationBlock img {
     border-radius: 50%;
     height: 200px;
 }
 
-.aboutCont{
+.aboutCont {
     margin: 0 auto;
     display: flex;
     width: 60%;
     padding-top: 20px;
 }
 
-.aboutCont p{
+.aboutCont p {
     padding-left: 40px;
-} 
+}
 
 @media (max-width: 700px) {
 
-    h2{
-        font-size:28px;
+    h2 {
+        font-size: 28px;
     }
 
 
-    .informationBlock img{
-       display: none;
+    .informationBlock img {
+        display: none;
     }
 
-    .aboutCont{
+    .aboutCont {
         width: 100%;
 
     }

@@ -14,12 +14,14 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormControlDirective, FormsModule } from '@angular/forms';
-import { BoardComponent } from './components/boards/boards.component';
+import { BoardsComponent } from './components/boards/boards.component';
 
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { CreateBoardComponent } from './components/create-board/create-board.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { BoardComponent } from './pages/board/board.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -38,8 +40,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     StartPageComponent,
     LoginComponent,
     AdministrationComponent,
+    BoardsComponent,
+    CreateBoardComponent,
     BoardComponent,
-    CreateBoardComponent
+    ModalComponent
   ],
   imports: [
     BrowserModule,
