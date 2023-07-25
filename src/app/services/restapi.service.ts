@@ -369,7 +369,7 @@ export class RestApiService {
       const taskData = {
         "title": title,
         "order": 0,
-        "description": description ?? " ",
+        "description": description,
         "userId": 0,
         "users": []
       };
@@ -418,6 +418,68 @@ export class RestApiService {
     } catch (error) {
       Swal.fire(this.translateService.instant('error400'));
     }
+  }
+
+  public changeTask(idColumn: string, idTask: string, title: string, description: string){
+    try {
+
+      const idBoard = this.openBoardService.getId();
+      const url = `http://0.0.0.0:3000/boards/${idBoard}/columns/${idColumn}/tasks/${idTask}`;
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.token}`
+      });
+
+      const taskData = {
+        "title": title,
+        "order": 0,
+        "description": description,
+        "columnId": idColumn,
+        "userId": 0,
+        "users": []
+      };
+
+      const data = this.http.put(url, taskData, { headers }).toPromise();
+      this.getColumnsBoard(idBoard);
+      Swal.fire({
+        icon: 'success',
+        title: this.translateService.instant('successTaskChange'),
+        showConfirmButton: false,
+        timer: 1500
+      });
+    } catch (error) {
+      Swal.fire(this.translateService.instant('error400'));
+    }
+  }
+
+
+  public async changeTitleColumn(idColumn: string, title:string){
+    try {
+
+      const idBoard = this.openBoardService.getId();
+      const url = `http://0.0.0.0:3000/boards/${idBoard}/columns/${idColumn}`;
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.token}`
+      });
+
+      const columnData ={
+        "title": title,
+        "order": 0
+      }
+
+      const data = await this.http.put(url, columnData, { headers }).toPromise();
+      await this.getColumnsBoard(idBoard);
+      Swal.fire({
+        icon: 'success',
+        title: this.translateService.instant('successColumnTitleChange'),
+        showConfirmButton: false,
+        timer: 1500
+      });
+    } catch (error) {
+      Swal.fire(this.translateService.instant('error400'));
+    }
+
   }
 
 
