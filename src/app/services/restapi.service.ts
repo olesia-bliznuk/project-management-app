@@ -482,6 +482,34 @@ export class RestApiService {
 
   }
 
+  public async changeTitleBoard(title: string){
+    try {
+      const idBoard = this.openBoardService.getId();
+      const url = `http://0.0.0.0:3000/boards/${idBoard}`;
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.token}`
+      });
+
+      const BoardData = {
+        "title": title,
+        "owner": this.currentLogin,
+        "users": [this.currentLogin]
+      }
+
+      const data = await this.http.put(url, BoardData, { headers }).toPromise();
+      // await this.getColumnsBoard(idBoard);
+      Swal.fire({
+        icon: 'success',
+        title: this.translateService.instant('successTitleChange'),
+        showConfirmButton: false,
+        timer: 1500
+      });
+    } catch (error) {
+      Swal.fire(this.translateService.instant('error400'));
+    }
+  }
+
 
 
 

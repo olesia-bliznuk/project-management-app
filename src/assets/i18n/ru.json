@@ -66,5 +66,6 @@
   "change": "Изменить",
   "successTaskChange": "Задача успешно изменена",
   "enterAllFields": "Заполните все поля",
-  "successColumnTitleChange": "Заголок колонки успешно изменен"
+  "successColumnTitleChange": "Заголок колонки успешно изменен",
+  "successTitleChange": "Заголок успешно изменен"
   }
