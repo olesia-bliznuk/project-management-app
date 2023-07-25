@@ -1,0 +1,28 @@
+<app-navigation></app-navigation>
+<div class="board">
+    <div class="headerBoard">
+        <button (click)="openStartPage()">{{ "cancel" | translate}}</button>
+        <h2 class="titleBoard">{{title}}</h2>
+        <button (click)="createColumn()">{{ "CreateColumn" | translate}}</button>
+    </div>
+    <div class="gridColumns">
+        <div class="columnBoard" *ngFor="let item of restApiService.allColumns" [id]="item._id"> 
+            <div class="titleColumn">
+                <h3>{{ item.title }}</h3>
+            <button (click)="deleteColumn($event, item._id)" class="deleteColummn">{{ "deleteColumn" | translate }}</button>
+            </div>
+            
+            <button (click)="createTask(item._id)" class="createTask">{{ "createTask" | translate}}</button>
+
+            <div *ngFor="let task of getTasksByColumnId(item._id)" [id]="task._id" class="task">
+                <h4>{{ task.title }}</h4>
+                <p>{{ task.description }}</p>
+                <button (click)="deleteTask($event, item._id, task._id)"> {{ "delete" | translate }}</button>
+            </div>
+
+        </div> 
+    </div>
+</div>
+<app-modal *ngIf="showModal" (closeModalEvent)="closeModal()"></app-modal>
+<app-footer></app-footer>
+

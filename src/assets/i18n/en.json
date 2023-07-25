@@ -49,5 +49,17 @@
   "myBoards": "My boards",
   "deleteBoard": "Delete board",
   "YesDeleteBoard": "Yes, delete this board!",
-  "DeleteBoard": "Board removed"
+  "DeleteBoard": "Board removed",
+  "CreateColumn": "Create column",
+  "deleteColumn": "Delete column",
+  "createTask": "Create task",
+  "YesDeleteColumn": "Yes, delete this column!",
+  "DeleteColumn": "Column removed",
+  "description": "Description",
+  "CreateTask": "Create task",
+  "successColumn":  "Column created successfully",
+  "successTask": "Task created successfully",
+  "delete": "Delete",
+  "YesDeleteTask": "Yes, delete this task!",
+  "DeleteTask": "Task removed"
   }

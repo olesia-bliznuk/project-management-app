@@ -49,5 +49,17 @@
   "myBoards": "Мои доски",
   "deleteBoard": "Удалить доску",
   "YesDeleteBoard": "Да, удалить доску",
-  "DeleteBoard": "Доска удалена"
+  "DeleteBoard": "Доска удалена",
+  "CreateColumn": "Создать столбец",
+  "deleteColumn": "Удалить столбец",
+  "createTask": "Создать задачу",
+  "YesDeleteColumn": "Да, удалить эту столбец",
+  "DeleteColumn": "Колонка удалена",
+  "description": "Описание",
+  "CreateTask": "Создать задачу",
+  "successColumn":  "Колонка успешно создана",
+  "successTask": "Задача успешно создана",
+  "delete": "Удалить",
+  "YesDeleteTask": "Да, удалить эту задачу",
+  "DeleteTask": "Задача удалена"
   }

@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { ElementSchemaRegistry } from '@angular/compiler';
 import { map } from 'rxjs/operators';
+import { OpenBoardService } from './open-board.service';
 
 
 
@@ -19,10 +20,13 @@ export class RestApiService {
   response: any;
   allUsers: any;
   allBoards: any;
+  allColumns: any;
+  allBoardTasks: any;
 
   constructor(private http: HttpClient,
     private translateService: TranslateService,
-    private router: Router) {
+    private router: Router,
+    public openBoardService: OpenBoardService) {
   }
 
   public registration(userName: string, userLogin: string, userPassword: string): void {
@@ -77,11 +81,10 @@ export class RestApiService {
           response.json().then(data => {
             this.token = data.token;
             this.router.navigate(['']);
-
+            this.currentLogin = userLogin;
             const today = new Date();
             this.expirationDate = new Date(today);
             this.expirationDate.setDate(today.getDate() + 5);
-
             localStorage.setItem('token', this.token);
             localStorage.setItem('expirationDate', this.expirationDate);
             localStorage.setItem('login', userLogin);
@@ -102,15 +105,15 @@ export class RestApiService {
       if (expirationDate > new Date()) {
         this.token = storedToken;
         this.getAllBoards();
+      } else {
+        localStorage.clear();
       }
     }
   }
 
   public deleteAutoSignIn(): void {
     this.token = "";
-    localStorage.removeItem('token');
-    localStorage.removeItem('expirationDate');
-    localStorage.removeItem('login');
+    localStorage.clear();
   }
 
   public async getAllUsers() {
@@ -145,13 +148,41 @@ export class RestApiService {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${this.token}`
       });
-
       const data = await this.http.delete(url, { headers }).toPromise();
+      this.removeAllUsersBoards();
       this.deleteAutoSignIn();
       this.router.navigate(['']);
     } catch (error: any) {
       Swal.fire('Error:', error.message);
     }
+  }
+
+  public async removeAllUsersBoards() {
+    await this.allBoards.forEach((element: { _id: string; }) => this.deleteBoard(element._id))
+  }
+
+  public async changeBoard(id: string, title: string) {
+    try {
+      const url = `http://0.0.0.0:3000/boards/${id}`;
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.token}`
+      });
+
+      const userData = {
+        "title": title,
+        "owner": this.currentLogin,
+        "users": this.currentLogin
+      };
+      const data = this.http.put(url, userData, { headers }).toPromise();
+      this.getAllBoards();
+    } catch (error) {
+      Swal.fire(this.translateService.instant('error400'));
+    }
+  }
+
+  public async changeAllUsersBoards() {
+    this.allBoards.forEach((element: { _id: string; title: string; }) => this.changeBoard(element._id, element.title))
   }
 
   public async changeUserInfo(userName: string, userLogin: string, userPassword: string) {
@@ -180,6 +211,7 @@ export class RestApiService {
       let storedLogin: any = localStorage.getItem("login");
       storedLogin = userLogin;
       localStorage.setItem("login", storedLogin);
+      this.changeAllUsersBoards();
     } catch (error: any) {
       if (error.status === 409)
         Swal.fire(this.translateService.instant('error409'));
@@ -223,16 +255,16 @@ export class RestApiService {
         'Authorization': `Bearer ${this.token}`
       });
       const data = await this.http.get(url, { headers }).toPromise()
-      .then(response => {
-        this.allBoards = response;
-      })
+        .then(response => {
+          this.allBoards = response;
+        })
     } catch (error) {
       Swal.fire(this.translateService.instant('error400'));
     }
   }
 
 
-  public deleteBoard(id: string){
+  public deleteBoard(id: string) {
     try {
       const url = `http://0.0.0.0:3000/boards/${id}`;
       const headers = new HttpHeaders({
@@ -245,6 +277,149 @@ export class RestApiService {
       Swal.fire(this.translateService.instant('error400'));
     }
   }
+
+
+  // public getBoardInfo( id?: string){
+  //   try {
+  //     const url = `http://0.0.0.0:3000/boards/${id}`;
+  //     const headers = new HttpHeaders({
+  //       'accept': 'application/json',
+  //       'Authorization': `Bearer ${this.token}`
+  //     });
+  //     const data = this.http.get(url, { headers }).toPromise()
+  //       .then(response => {
+  //         board = response;
+  //       })
+  //   } catch (error) {
+  //     Swal.fire(this.translateService.instant('error400'));
+  //   }
+  // }
+
+  public async createColumn(title: string) {
+    try {
+      let idBoard = this.openBoardService.getId();
+      const url = `http://0.0.0.0:3000/boards/${idBoard}/columns`;
+      const headers = new HttpHeaders({
+        'accept': 'application/json',
+        'Authorization': `Bearer ${this.token}`
+      });
+
+      const columnData = {
+        "title": title,
+        "order": 0
+      };
+
+      const data = await this.http.post(url, columnData, { headers }).toPromise();
+      this.getColumnsBoard(idBoard);
+      Swal.fire({
+        icon: 'success',
+        title: this.translateService.instant('successColumn'),
+        showConfirmButton: false,
+        timer: 1500
+      });
+    } catch (error) {
+      Swal.fire(this.translateService.instant('error400'));
+    }
+  }
+
+
+  public async getColumnsBoard(id: string | undefined) {
+    try {
+      const url = `http://0.0.0.0:3000/boards/${id}/columns`;
+      const headers = new HttpHeaders({
+        'accept': 'application/json',
+        'Authorization': `Bearer ${this.token}`
+      });
+      const data = await this.http.get(url, { headers }).toPromise()
+        .then(response => {
+          this.allColumns = response;
+          this.getAllTasksInBoard();
+        })
+
+    } catch (error) {
+      Swal.fire(this.translateService.instant('error400'));
+    }
+  }
+
+  public async deleteColumn(idColumn: string) {
+    try {
+      const idBoard = this.openBoardService.getId();
+      const url = `http://0.0.0.0:3000/boards/${idBoard}/columns/${idColumn}`;
+      const headers = new HttpHeaders({
+        'accept': 'application/json',
+        'Authorization': `Bearer ${this.token}`
+      });
+      const data = await this.http.delete(url, { headers }).toPromise();
+      this.getColumnsBoard(idBoard);
+    } catch (error) {
+      Swal.fire(this.translateService.instant('error400'));
+    }
+
+  }
+
+  public async createTask(id: string, title: string, description: string ) {
+    try {
+      const idBoard = this.openBoardService.getId();
+      const url = `http://0.0.0.0:3000/boards/${idBoard}/columns/${id}/tasks`;
+      const headers = new HttpHeaders({
+        'accept': 'application/json',
+        'Authorization': `Bearer ${this.token}`
+      });
+
+      const taskData = {
+        "title": title,
+        "order": 0,
+        "description": description ?? " ",
+        "userId": 0,
+        "users": []
+      };
+
+      const data = await this.http.post(url, taskData, { headers }).toPromise();
+      this.getColumnsBoard(idBoard);
+      Swal.fire({
+        icon: 'success',
+        title: this.translateService.instant('successTask'),
+        showConfirmButton: false,
+        timer: 1500
+      });
+    } catch (error) {
+      Swal.fire(this.translateService.instant('error400'));
+    }
+  }
+
+  public async getAllTasksInBoard(){
+    try {
+      const idBoard = this.openBoardService.getId();
+      const url = `http://0.0.0.0:3000/tasksSet/${idBoard}`;
+      const headers = new HttpHeaders({
+        'accept': 'application/json',
+        'Authorization': `Bearer ${this.token}`
+      });
+      const data = await this.http.get(url, { headers }).toPromise()
+        .then(response => {
+          this.allBoardTasks = response;
+        })
+
+    } catch (error) {
+      Swal.fire(this.translateService.instant('error400'));
+    }
+  }
+
+  public async deleteTask(ColumnId: string, TaskId: string){
+    try {
+      const idBoard = this.openBoardService.getId();
+      const url = `http://0.0.0.0:3000/boards/${idBoard}/columns/${ColumnId}/tasks/${TaskId}`;
+      const headers = new HttpHeaders({
+        'accept': 'application/json',
+        'Authorization': `Bearer ${this.token}`
+      });
+      const data = await this.http.delete(url, { headers }).toPromise();
+      this.getColumnsBoard(idBoard);
+    } catch (error) {
+      Swal.fire(this.translateService.instant('error400'));
+    }
+  }
+
 
 
 
