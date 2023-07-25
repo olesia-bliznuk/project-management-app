@@ -32,8 +32,10 @@ export class ModalComponent implements OnInit{
   create(){
     if (this.type === 'column')
       this.createColumn();
-    else
+    else if(this.type === 'task') 
       this.createTask();
+      else
+      this.changeTask();
 
   }
 
@@ -48,11 +50,21 @@ export class ModalComponent implements OnInit{
   }
 
   createTask(){
-    if (!this.title) {
-      Swal.fire(this.translateService.instant('enterTitle'));
+    if (!this.title || !this.description) {
+      Swal.fire(this.translateService.instant('enterAllFields'));
     }
     else {
       this.restapiservice.createTask(this.openBoardService.getIdColumn(), this.title, this.description);
+      this.closeModal();
+    }
+  }
+
+  changeTask(){
+    if (!this.title || !this.description) {
+      Swal.fire(this.translateService.instant('enterAllFields'));
+    }
+    else {
+      this.restapiservice.changeTask(this.openBoardService.getIdColumn(), this.openBoardService.getIdTask(), this.title, this.description);
       this.closeModal();
     }
   }

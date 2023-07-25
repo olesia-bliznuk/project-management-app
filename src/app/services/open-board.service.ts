@@ -9,6 +9,8 @@ export class OpenBoardService {
   private ColumnId!: string;
   private title!: string;
   private createColumn!: string;
+  private TaskId!: string;
+
 
   setData(id: string, title: string) {
     this.BoardId = id;
@@ -37,5 +39,13 @@ export class OpenBoardService {
 
   setIdColumn(id: string){
     this.ColumnId = id;
+  }
+
+  getIdTask(): any {
+    return this.TaskId;
+  }
+
+  setIdTask(id: string){
+    this.TaskId = id;
   }
 }

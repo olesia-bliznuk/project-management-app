@@ -61,5 +61,10 @@
   "successTask": "Task created successfully",
   "delete": "Delete",
   "YesDeleteTask": "Yes, delete this task!",
-  "DeleteTask": "Task removed"
+  "DeleteTask": "Task removed",
+  "ChangeTask": "Change task",
+  "change": "Change",
+  "successTaskChange": "Task changed successfully",
+  "enterAllFields": "Enter all fields",
+  "successColumnTitleChange": "Column's title changed successfull"
   }

@@ -37,7 +37,20 @@ h1:hover{
     cursor: pointer;
 }
 
-@media (max-width: 700px) {
+.contName{
+    display: flex;
+}
+
+.contName h4{
+    margin-left:10px;
+    padding: 0 10px;
+    font-size: 20px;
+    line-height: 32px;
+    background-color: #fff;
+    border-radius: 7px;
+}
+
+@media (max-width: 850px) {
     .navigation{
         display: block;
         margin: 0;
@@ -53,5 +66,11 @@ h1:hover{
         width: 200px;
         height: 50px;
         margin: 5px 20px;
+    }
+}
+
+@media (max-width: 450px){
+    .contName{
+       flex-direction: column;
     }
 }

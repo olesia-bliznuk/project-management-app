@@ -61,5 +61,10 @@
   "successTask": "Задача успешно создана",
   "delete": "Удалить",
   "YesDeleteTask": "Да, удалить эту задачу",
-  "DeleteTask": "Задача удалена"
+  "DeleteTask": "Задача удалена",
+  "ChangeTask": "Изменить задачу",
+  "change": "Изменить",
+  "successTaskChange": "Задача успешно изменена",
+  "enterAllFields": "Заполните все поля",
+  "successColumnTitleChange": "Заголок колонки успешно изменен"
   }

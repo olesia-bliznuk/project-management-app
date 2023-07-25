@@ -61,6 +61,12 @@ button:hover {
     text-align: center;
 }
 
+.titleColumn h3:hover{
+    cursor: pointer;
+    color: #fff;
+    transition: all ease 0.5s;
+}
+
 .deleteColummn {
     width: 230px;
     height: 50px;
@@ -102,6 +108,48 @@ button:hover {
 
 .task h4 {
     font-size: 20px;
+}
+
+.task:hover{
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.25);
+    transition: all ease 0.5s;
+}
+
+.containerChangeTitleColumn{
+    display: flex;
+   justify-content: center;
+   padding: 5px 0px;
+}
+
+.inputChangeTitleColumn{
+    display: block;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    font-size: 18px;
+    width: 250px;
+    height: 30px;
+}
+
+.btnChangeTitle{
+    display: block;
+    width: 30px;
+    height: 34px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    margin: 0px 5px;
+    background-color: #fff;
+    line-height: 25px;
+    font-size: 22px;
+    font-weight: 700;
+    color: #44b78b;
+}
+
+.btnChangeTitle:hover{
+    background-color: #44b78b;
+    color: #fff;
+    cursor: pointer;
+
 }
 
 @media (max-width: 980px) {

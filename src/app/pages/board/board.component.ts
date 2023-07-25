@@ -14,7 +14,8 @@ import { OpenBoardService } from 'src/app/services/open-board.service';
 export class BoardComponent implements OnInit {
 
   showModal = false;
-
+  editedTitleColumn: string = "";
+  editingItemId: string | null = null;
   private idBoard?: string;
   public title?: string;
 
@@ -50,7 +51,6 @@ export class BoardComponent implements OnInit {
   }
 
   deleteColumn(event: Event, id: string) {
-
     Swal.fire({
       title: this.translateService.instant('AreYouSure'),
       icon: 'warning',
@@ -70,18 +70,20 @@ export class BoardComponent implements OnInit {
     event.stopPropagation();
   }
 
-  createTask(id: string){
+  createTask(id: string) {
     this.openBoardService.setIdColumn(id);
     this.showModal = true;
     this.openBoardService.changeCreate('task');
   }
 
-  getTasksByColumnId(id: string){
-      return  this.restApiService.allBoardTasks.filter((item: { columnId: string; }) => item.columnId === id);
+  getTasksByColumnId(id: string) {
+    if (this.restApiService.allBoardTasks)
+      return this.restApiService.allBoardTasks.filter((item: { columnId: string; }) => item.columnId === id);
+    else
+      return [];
   }
 
   deleteTask(event: Event, ColumnId: string, TaskId: string) {
-
     Swal.fire({
       title: this.translateService.instant('AreYouSure'),
       icon: 'warning',
@@ -99,6 +101,32 @@ export class BoardComponent implements OnInit {
       }
     });
     event.stopPropagation();
+  }
+
+  changeTask(event: Event, ColumnId: string, TaskId: string) {
+
+    this.openBoardService.setIdColumn(ColumnId);
+    this.openBoardService.setIdTask(TaskId);
+    this.showModal = true;
+    this.openBoardService.changeCreate('taskChange');
+    event.stopPropagation();
+  }
+
+  saveTitleColumn(idColumn: string) {
+    this.editingItemId = null;
+    if (this.editedTitleColumn)
+      this.restApiService.changeTitleColumn(idColumn, this.editedTitleColumn);
+    else
+      Swal.fire(this.translateService.instant('enterTitle'));
+  }
+
+  cancelTitleColumn() {
+    this.editingItemId = null;
+  }
+
+  startEditingTitleColumn(itemId: string) {
+    this.editingItemId = itemId;
+    this.editedTitleColumn = this.restApiService.allColumns.find((item: { _id: string; }) => item._id === itemId)?.title || '';
   }
 
 
