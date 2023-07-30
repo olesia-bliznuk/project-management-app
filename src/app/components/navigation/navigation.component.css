@@ -1,4 +1,4 @@
-.navigation{
+.navigation {
     display: flex;
     justify-content: space-between;
     background-color: #44b78b;
@@ -6,20 +6,20 @@
     margin: 0;
 }
 
-h1{
+h1 {
     margin: 20px 10px;
     font-size: 40px;
 }
 
-h1:hover{
+h1:hover {
     cursor: pointer;
 }
 
-.container{
+.container {
     display: flex;
 }
 
-.button{
+.button {
     width: 130px;
     height: 50px;
     border-radius: 7px;
@@ -37,12 +37,12 @@ h1:hover{
     cursor: pointer;
 }
 
-.contName{
+.contName {
     display: flex;
 }
 
-.contName h4{
-    margin-left:10px;
+.contName h4 {
+    margin-left: 10px;
     padding: 0 10px;
     font-size: 20px;
     line-height: 32px;
@@ -51,26 +51,26 @@ h1:hover{
 }
 
 @media (max-width: 850px) {
-    .navigation{
+    .navigation {
         display: block;
         margin: 0;
         padding: 20px;
     }
 
-    .container{
+    .container {
         display: block;
         text-align: center;
     }
 
-    .button{
+    .button {
         width: 200px;
         height: 50px;
         margin: 5px 20px;
     }
 }
 
-@media (max-width: 450px){
-    .contName{
-       flex-direction: column;
+@media (max-width: 450px) {
+    .contName {
+        flex-direction: column;
     }
 }

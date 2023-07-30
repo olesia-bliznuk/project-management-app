@@ -34,7 +34,7 @@ export class NavigationComponent implements OnInit{
   }
 
   switchLanguage(lang: string) {
-    this.translateService.use(lang); // Изменение языка
+    this.translateService.use(lang); 
   }
 
   openAdminPage(): void {

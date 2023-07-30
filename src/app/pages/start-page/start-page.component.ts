@@ -8,7 +8,6 @@ import { RestApiService } from 'src/app/services/restapi.service';
 })
 export class StartPageComponent {
   constructor ( public restapiservice: RestApiService){
-    
   }
 
 }
