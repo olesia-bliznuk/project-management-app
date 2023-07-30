@@ -33,7 +33,7 @@
   "error409": "Login already exist",
   "error400": "Bad Request",
   "error401": "Authorization error",
-  "notAllFiels":  "Fill in all the fields",
+  "notAllFiels": "Fill in all the fields",
   "CreateBoard": "Create board",
   "LogOut": "Log out",
   "EditProfile": "Edit Profile",
@@ -57,7 +57,7 @@
   "DeleteColumn": "Column removed",
   "description": "Description",
   "CreateTask": "Create task",
-  "successColumn":  "Column created successfully",
+  "successColumn": "Column created successfully",
   "successTask": "Task created successfully",
   "delete": "Delete",
   "YesDeleteTask": "Yes, delete this task!",
@@ -68,4 +68,4 @@
   "enterAllFields": "Enter all fields",
   "successColumnTitleChange": "Column's title changed successfull",
   "successTitleChange": "Title changed successfull"
-  }
+}

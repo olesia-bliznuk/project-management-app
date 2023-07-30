@@ -7,6 +7,6 @@ import { LanguageService } from 'src/app/services/language.service';
   styleUrls: ['./start-screen.component.css']
 })
 export class StartScreenComponent {
-  constructor(public languageService: LanguageService,) {
+  constructor(public languageService: LanguageService) {
   }
 }

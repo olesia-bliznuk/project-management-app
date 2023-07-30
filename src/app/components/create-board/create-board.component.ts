@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RestApiService } from 'src/app/services/restapi.service';
-import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { TranslateService } from '@ngx-translate/core';
+import { SwalService } from 'src/app/services/swal.service';
 
 @Component({
   selector: 'app-create-board',
@@ -15,7 +15,8 @@ export class CreateBoardComponent {
   constructor(
     private router: Router,
     public restapiservice: RestApiService,
-    private translateService: TranslateService) {
+    private translateService: TranslateService,
+    private swalService: SwalService) {
   }
 
   cancel() {
@@ -23,11 +24,11 @@ export class CreateBoardComponent {
   }
 
   createBoard() {
-    if (this.title){
+    if (this.title) {
       this.restapiservice.createBoard(this.title);
       this.cancel();
     }
     else
-      Swal.fire(this.translateService.instant('enterTitle'));
+      this.swalService.swalFire(this.translateService.instant('enterTitle'));
   }
 }

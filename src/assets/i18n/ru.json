@@ -33,7 +33,7 @@
   "error409": "Логин уже существует",
   "error400": "Неверный запрос",
   "error401": "Ошибка авторизации",
-  "notAllFiels":  "Заполните все поля",
+  "notAllFiels": "Заполните все поля",
   "CreateBoard": "Создать доску",
   "LogOut": "Выйти",
   "EditProfile": "Редактировать профиль",
@@ -57,7 +57,7 @@
   "DeleteColumn": "Колонка удалена",
   "description": "Описание",
   "CreateTask": "Создать задачу",
-  "successColumn":  "Колонка успешно создана",
+  "successColumn": "Колонка успешно создана",
   "successTask": "Задача успешно создана",
   "delete": "Удалить",
   "YesDeleteTask": "Да, удалить эту задачу",
@@ -68,4 +68,4 @@
   "enterAllFields": "Заполните все поля",
   "successColumnTitleChange": "Заголок колонки успешно изменен",
   "successTitleChange": "Заголок успешно изменен"
-  }
+}

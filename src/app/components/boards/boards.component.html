@@ -1,7 +1,8 @@
 <div class="boards">
     <h2>{{ "myBoards" | translate}}</h2>
     <div class="boardsGrid">
-        <div (click)="openBoard(item._id, item.title)" class="board" *ngFor="let item of restapiservice.allBoards" [id]="item._id">
+        <div (click)="openBoard(item._id, item.title)" class="board" *ngFor="let item of restapiservice.allBoards"
+            [id]="item._id">
             <h3>{{ item.title }}</h3>
             <hr>
             <button (click)="deleteBoard($event, item._id)" class="deleteButton">{{ "deleteBoard" | translate}}</button>

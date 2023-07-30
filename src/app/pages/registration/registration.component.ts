@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { RestApiService } from 'src/app/services/restapi.service';
-import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { TranslateService } from '@ngx-translate/core';
+import { SwalService } from 'src/app/services/swal.service';
 
 @Component({
   selector: 'app-registration',
@@ -13,11 +13,11 @@ export class RegistrationComponent {
   userLogin: string = "";
   userName: string = "";
   userPassword: string = "";
-  response: any;
 
   constructor(private router: Router,
     public restapi: RestApiService,
-    private translateService: TranslateService) {
+    private translateService: TranslateService,
+    private swalServie: SwalService) {
   }
 
   openStartPage(): void {
@@ -25,10 +25,10 @@ export class RegistrationComponent {
   }
 
   registratin(): void {
-    if (this.userName.length >= 6  && this.userLogin.length >= 6  && this.userPassword.length >= 6) 
+    if (this.userName.length >= 6 && this.userLogin.length >= 6 && this.userPassword.length >= 6)
       this.restapi.registration(this.userName, this.userLogin, this.userPassword);
     else
-      Swal.fire(this.translateService.instant('notAllFiels'));
+      this.swalServie.error(this.translateService.instant('notAllFiels'));
   }
 
 }

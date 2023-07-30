@@ -44,7 +44,6 @@
     background-color: #44b78b;
     font-size: 18px;
     color: #fff;
-
 }
 
 .createBoard button:hover {
@@ -54,12 +53,14 @@
     cursor: pointer;
 }
 
-#title.ng-invalid.ng-touched{
-    border-left: 5px solid #a94442; /* red */
+#title.ng-invalid.ng-touched {
+    border-left: 5px solid #a94442;
+    /* red */
 }
 
-#title.ng-valid{
-    border-left: 5px solid #42A948; /* green */
+#title.ng-valid {
+    border-left: 5px solid #42A948;
+    /* green */
 }
 
 .alert {
@@ -69,10 +70,10 @@
     margin-bottom: 10px;
     border: 1px solid transparent;
     border-radius: 4px;
-  }
+}
 
-  .alert-danger {
+.alert-danger {
     background-color: #f2dede;
     border-color: #ebccd1;
     color: #a94442;
-  }
+}

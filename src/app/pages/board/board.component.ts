@@ -1,10 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RestApiService } from 'src/app/services/restapi.service';
-import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { TranslateService } from '@ngx-translate/core';
 import { OpenBoardService } from 'src/app/services/open-board.service';
+import { SwalService } from 'src/app/services/swal.service';
 
+interface board {
+  "_id": string,
+  "title": string,
+  "owner": string,
+  "users": [
+    string
+  ]
+};
+
+interface task
+  {
+    "_id": string,
+    "title": string,
+    "order": string,
+    "boardId": string,
+    "columnId": string,
+    "description": string,
+    "userId": string,
+    "users": [
+      string
+    ]
+  };
 
 @Component({
   selector: 'app-board',
@@ -24,7 +46,8 @@ export class BoardComponent implements OnInit {
   constructor(private router: Router,
     public openBoardService: OpenBoardService,
     public restApiService: RestApiService,
-    private translateService: TranslateService,) {
+    private translateService: TranslateService,
+    private swalService: SwalService) {
   }
 
   ngOnInit(): void {
@@ -54,22 +77,13 @@ export class BoardComponent implements OnInit {
   }
 
   deleteColumn(event: Event, id: string) {
-    Swal.fire({
-      title: this.translateService.instant('AreYouSure'),
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#44b78b',
-      cancelButtonColor: '#d33',
-      confirmButtonText: this.translateService.instant('YesDeleteColumn'),
-      cancelButtonText: this.translateService.instant('cancel')
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.restApiService.deleteColumn(id);
-        Swal.fire(
-          this.translateService.instant('DeleteColumn')
-        )
-      }
-    });
+    this.swalService.warning(this.translateService.instant('AreYouSure'), this.translateService.instant('YesDeleteColumn'))
+      .then((result) => {
+        if (result.isConfirmed) {
+          this.restApiService.deleteColumn(id);
+          this.swalService.swalFire(this.translateService.instant('DeleteColumn'));
+        }
+      });
     event.stopPropagation();
   }
 
@@ -81,28 +95,19 @@ export class BoardComponent implements OnInit {
 
   getTasksByColumnId(id: string) {
     if (this.restApiService.allBoardTasks)
-      return this.restApiService.allBoardTasks.filter((item: { columnId: string; }) => item.columnId === id);
+      return this.restApiService.allBoardTasks.filter((item: task) => item.columnId === id);
     else
       return [];
   }
 
   deleteTask(event: Event, ColumnId: string, TaskId: string) {
-    Swal.fire({
-      title: this.translateService.instant('AreYouSure'),
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#44b78b',
-      cancelButtonColor: '#d33',
-      confirmButtonText: this.translateService.instant('YesDeleteTask'),
-      cancelButtonText: this.translateService.instant('cancel')
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.restApiService.deleteTask(ColumnId, TaskId);
-        Swal.fire(
-          this.translateService.instant('DeleteTask')
-        )
-      }
-    });
+    this.swalService.warning(this.translateService.instant('AreYouSure'), this.translateService.instant('YesDeleteTask'))
+      .then((result) => {
+        if (result.isConfirmed) {
+          this.restApiService.deleteTask(ColumnId, TaskId);
+          this.swalService.swalFire(this.translateService.instant('DeleteTask'));
+        }
+      });
     event.stopPropagation();
   }
 
@@ -120,7 +125,7 @@ export class BoardComponent implements OnInit {
     if (this.editedTitleColumn)
       this.restApiService.changeTitleColumn(idColumn, this.editedTitleColumn);
     else
-      Swal.fire(this.translateService.instant('enterTitle'));
+      this.swalService.swalFire(this.translateService.instant('enterTitle'));
   }
 
   cancelTitleColumn() {
@@ -132,24 +137,21 @@ export class BoardComponent implements OnInit {
     this.editedTitleColumn = this.restApiService.allColumns.find((item: { _id: string; }) => item._id === itemId)?.title || '';
   }
 
-  cancelBoardColumn(){
+  cancelBoardColumn() {
     this.editingTitleBoard = false;
   }
 
-  saveTitleBoard(){
+  saveTitleBoard() {
     this.editingTitleBoard = false;
-    if (this.editedTitleBoard){
+    if (this.editedTitleBoard) {
       this.restApiService.changeTitleBoard(this.editedTitleBoard);
       this.title = this.editedTitleBoard;
     }
     else
-      Swal.fire(this.translateService.instant('enterTitle'));
+      this.swalService.swalFire(this.translateService.instant('enterTitle'));
   }
 
-  startEditingTitleBoard(){
+  startEditingTitleBoard() {
     this.editingTitleBoard = true;
   }
-
-
-
 }

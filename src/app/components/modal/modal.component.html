@@ -1,12 +1,12 @@
 <div class="modal">
     <div class="modal-content">
-        <h3 *ngIf="type === 'column'" >{{"CreateColumn" | translate}}</h3>
+        <h3 *ngIf="type === 'column'">{{"CreateColumn" | translate}}</h3>
         <h3 *ngIf="type === 'task'">{{"CreateTask" | translate}}</h3>
         <h3 *ngIf="type !== 'task' && type !== 'column'">{{"ChangeTask" | translate}}</h3>
 
         <label>{{ "title" | translate}}</label>
         <input type="text" [(ngModel)]="title">
-        
+
         <label *ngIf="type !== 'column'">{{ "description" | translate}}</label>
         <textarea *ngIf="type !== 'column'" type="text" [(ngModel)]="description"></textarea>
 

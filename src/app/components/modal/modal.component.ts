@@ -1,15 +1,15 @@
-import { Component, Output, EventEmitter, OnInit} from '@angular/core';
-import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { RestApiService } from 'src/app/services/restapi.service';
 import { OpenBoardService } from 'src/app/services/open-board.service';
+import { SwalService } from 'src/app/services/swal.service';
 
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css']
 })
-export class ModalComponent implements OnInit{
+export class ModalComponent implements OnInit {
   title!: string;
   description!: string;
   type!: string;
@@ -18,30 +18,30 @@ export class ModalComponent implements OnInit{
 
   constructor(private translateService: TranslateService,
     public restapiservice: RestApiService,
-    public openBoardService: OpenBoardService) { }
+    public openBoardService: OpenBoardService,
+    public swalService: SwalService) { }
 
-    ngOnInit(): void {
-      this.type = this.openBoardService.checkCreate();
-    }
+  ngOnInit(): void {
+    this.type = this.openBoardService.checkCreate();
+  }
 
   closeModal() {
     this.closeModalEvent.emit();
     this.openBoardService.changeCreate();
   }
 
-  create(){
+  create() {
     if (this.type === 'column')
       this.createColumn();
-    else if(this.type === 'task') 
+    else if (this.type === 'task')
       this.createTask();
-      else
+    else
       this.changeTask();
-
   }
 
   createColumn() {
     if (!this.title) {
-      Swal.fire(this.translateService.instant('enterTitle'));
+      this.swalService.error(this.translateService.instant('enterTitle'));
     }
     else {
       this.restapiservice.createColumn(this.title);
@@ -49,9 +49,9 @@ export class ModalComponent implements OnInit{
     }
   }
 
-  createTask(){
+  createTask() {
     if (!this.title || !this.description) {
-      Swal.fire(this.translateService.instant('enterAllFields'));
+      this.swalService.error(this.translateService.instant('enterAllFields'));
     }
     else {
       this.restapiservice.createTask(this.openBoardService.getIdColumn(), this.title, this.description);
@@ -59,9 +59,9 @@ export class ModalComponent implements OnInit{
     }
   }
 
-  changeTask(){
+  changeTask() {
     if (!this.title || !this.description) {
-      Swal.fire(this.translateService.instant('enterAllFields'));
+      this.swalService.error(this.translateService.instant('enterAllFields'));
     }
     else {
       this.restapiservice.changeTask(this.openBoardService.getIdColumn(), this.openBoardService.getIdTask(), this.title, this.description);
