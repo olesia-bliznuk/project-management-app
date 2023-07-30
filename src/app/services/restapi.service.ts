@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { TranslateService } from '@ngx-translate/core';
 import { createUrlTreeFromSnapshot, Router } from '@angular/router';
 import { OpenBoardService } from './open-board.service';
