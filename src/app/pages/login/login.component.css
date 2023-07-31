@@ -1,0 +1,85 @@
+:root {
+    position: relative;
+    height: 100%;
+    min-height: 100vh;
+}
+
+.login {
+    margin: 40px auto;
+    width: 300px;
+    padding: 20px;
+    min-height: 66vh;
+}
+
+.login div {
+    margin-top: 10px;
+}
+
+.login label {
+    font-size: 20px;
+}
+
+.login input {
+    display: block;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    font-size: 18px;
+    width: 280px;
+    height: 30px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.login button {
+    display: block;
+    width: 285px;
+    height: 50px;
+    border-radius: 7px;
+    border: 2px solid #44b78b;
+    margin-top: 20px;
+    background-color: #44b78b;
+    font-size: 18px;
+    color: #fff;
+
+}
+
+.login button:hover {
+    background-color: #fff;
+    color: #44b78b;
+    transition: background-color 0.8s ease, color 0.6s ease;
+    cursor: pointer;
+}
+
+#login.ng-invalid.ng-touched,
+#password.ng-invalid.ng-touched {
+    border-left: 5px solid #a94442;
+}
+
+#login.ng-valid,
+#password.ng-valid {
+    border-left: 5px solid #42A948;
+}
+
+.alert {
+    padding: 15px;
+    width: 260px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-danger {
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    color: #a94442;
+}
+
+#signIn:disabled {
+    background-color: rgb(145, 144, 144);
+}
+
+#signIn:disabled:hover {
+    background-color: rgb(145, 144, 144);
+    color: #fff;
+}

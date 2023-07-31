@@ -1,0 +1,36 @@
+<app-navigation></app-navigation>
+<form class="admin">
+    <fieldset>
+        <legend>{{ "changeName" | translate}}</legend>
+        <div>
+            <label for="login">{{ "login" | translate}}</label>
+            <input #login="ngModel" required minlength="6" type="text" [(ngModel)]="userLogin" name="login" id="login">
+            <div class="alert alert-danger" [hidden]="login.valid || login.pristine || login.untouched">
+                {{ "alertlogin" | translate}}
+            </div>
+
+        </div>
+        <div>
+            <label for="name">{{ "name" | translate}}</label>
+            <input #name="ngModel" required minlength="6" type="text" id="name" name="name" [(ngModel)]="userName">
+            <div class="alert alert-danger" [hidden]="name.valid || name.pristine || name.untouched">
+                {{ "alertname" | translate}}
+            </div>
+        </div>
+        <div>
+            <label for="password">{{ "newpassword" | translate}}</label>
+            <input #password="ngModel" required minlength="6" type="password" id="password" name="password"
+                [(ngModel)]="userPassword">
+            <div class="alert alert-danger" [hidden]="password.valid || password.pristine || password.untouched">
+                {{ "alertpassword" | translate}}
+            </div>
+        </div>
+
+    </fieldset>
+
+    <button (click)="changeInfo()">{{ "save" | translate}}</button>
+    <button (click)="openStartPage()">{{ "cancel" | translate}}</button>
+
+</form>
+<button class="removeAcc" (click)="removeUser()">{{ "removeUser" | translate }}</button>
+<app-footer></app-footer>

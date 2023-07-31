@@ -1,0 +1,48 @@
+<div class="containerBoard">
+    <app-navigation></app-navigation>
+    <div class="board">
+        <div class="headerBoard">
+            <button (click)="openStartPage()">{{ "cancel" | translate}}</button>
+            <div *ngIf="editingTitleBoard; else displayMode" class="containerChangeTitleBoard">
+                <button class="btnChangeTitle" (click)="cancelBoardColumn()">X</button>
+                <input class="inputChangeTitleBoard" [(ngModel)]="editedTitleBoard">
+                <button class="btnChangeTitle" (click)="saveTitleBoard()">&#10003;</button>
+            </div>
+            <ng-template #displayMode>
+                <h2 (click)="startEditingTitleBoard()" class="titleBoard">{{title}}</h2>
+            </ng-template>
+            <button (click)="createColumn()">{{ "CreateColumn" | translate}}</button>
+        </div>
+        <div class="grid-scroll-container">
+            <div class="gridColumns">
+                <div class="columnBoard" *ngFor="let item of restApiService.allColumns" [id]="item._id">
+                    <div class="titleColumn">
+                        <div *ngIf="editingItemId === item._id; else displayMode" class="containerChangeTitleColumn">
+                            <button class="btnChangeTitle" (click)="cancelTitleColumn()">X</button>
+                            <input class="inputChangeTitleColumn" [(ngModel)]="editedTitleColumn">
+                            <button class="btnChangeTitle" (click)="saveTitleColumn(item._id)">&#10003;</button>
+                        </div>
+                        <ng-template #displayMode>
+                            <h3 (click)="startEditingTitleColumn(item._id)">{{ item.title }}</h3>
+                        </ng-template>
+                        <button (click)="deleteColumn($event, item._id)" class="deleteColummn">{{ "deleteColumn" |
+                            translate
+                            }}</button>
+                    </div>
+                    <button (click)="createTask(item._id)" class="createTask">{{ "createTask" | translate}}</button>
+                    <div class="scrollTasks">
+                        <div *ngFor="let task of getTasksByColumnId(item._id)" [id]="task._id" class="task"
+                            (click)="changeTask($event, item._id, task._id)">
+                            <h4>{{ task.title }}</h4>
+                            <p>{{ task.description }}</p>
+                            <button (click)="deleteTask($event, item._id, task._id)"> {{ "delete" | translate
+                                }}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-modal *ngIf="showModal" (closeModalEvent)="closeModal()"></app-modal>
+    <app-footer></app-footer>
+</div>

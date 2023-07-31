@@ -1,0 +1,21 @@
+<app-navigation></app-navigation>
+<form class="login">
+    <div>
+        <label for="login">{{ "login" | translate}}</label>
+        <input #login="ngModel" required minlength="6" type="text" [(ngModel)]="userLogin" name="login" id="login">
+        <div class="alert alert-danger" [hidden]="login.valid || login.pristine || login.untouched">
+            {{ "alertlogin" | translate}}
+        </div>
+    </div>
+    <div>
+        <label for="password">{{ "password" | translate}}</label>
+        <input #password="ngModel" required minlength="6" type="password" id="password" name="password"
+            [(ngModel)]="userPassword">
+        <div class="alert alert-danger" [hidden]="password.valid || password.pristine || password.untouched">
+            {{ "alertpassword" | translate}}
+        </div>
+    </div>
+    <button type="submit" id="signIn" (click)="signIn()">{{ "LogIn" | translate}}</button>
+    <button id="cancel" (click)="openStartPage()">{{ "cancel" | translate}}</button>
+</form>
+<app-footer></app-footer>
