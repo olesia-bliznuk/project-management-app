@@ -67,5 +67,6 @@
   "successTaskChange": "Task changed successfully",
   "enterAllFields": "Enter all fields",
   "successColumnTitleChange": "Column's title changed successfull",
-  "successTitleChange": "Title changed successfull"
+  "successTitleChange": "Title changed successfull",
+  "searchBoard": "Search Board"
 }

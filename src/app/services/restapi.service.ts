@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
-import { createUrlTreeFromSnapshot, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { OpenBoardService } from './open-board.service';
 import { SwalService } from './swal.service';
 import { user, board, task, column } from '../interfaces/interfaces';
-// let jwt = require('jsonwebtoken');
+
 const urlApi = 'https://final-task-backend-production-5bd7.up.railway.app';
-// import { Buffer } from 'node:buffer';
 
 @Injectable({
   providedIn: 'root'
@@ -91,6 +90,21 @@ export class RestApiService {
       });
   }
 
+  public getTokenInfo(token: string) {
+    if (token) {
+      let headerBase64, payloadBase64, signature;
+      [headerBase64, payloadBase64, signature] = token.split('.');
+      const payLoad64 = payloadBase64.replace(/-/g, '+').replace(/_/g, '/');
+      const payload = JSON.parse(decodeURIComponent(
+        atob(payLoad64).split('').map((c) => {
+          return `%${`00${c.charCodeAt(0).toString(16)}`.slice(-2)}`;
+        })
+          .join('')
+      ));
+      return payload;
+    }
+  }
+
   public signIn(userLogin: string, userPassword: string): void {
 
     fetch(`${urlApi}/auth/signin`, {
@@ -116,6 +130,8 @@ export class RestApiService {
             this.router.navigate(['']);
             this.currentLogin = userLogin;
             localStorage.setItem('token', this.token);
+            const payload = this.getTokenInfo(this.token);
+            this.currentId = payload.id;
           });
         }
       })
@@ -127,15 +143,7 @@ export class RestApiService {
   public autoSignIn(): void {
     const storedToken = localStorage.getItem('token');
     if (storedToken) {
-      let headerBase64, payloadBase64, signature;
-      [headerBase64, payloadBase64, signature] = storedToken.split('.');
-      const payLoad64 = payloadBase64.replace(/-/g, '+').replace(/_/g, '/');
-      const payload = JSON.parse(decodeURIComponent(
-        atob(payLoad64).split('').map((c) => {
-          return `%${`00${c.charCodeAt(0).toString(16)}`.slice(-2)}`;
-        })
-          .join('')
-      ));
+      const payload = this.getTokenInfo(storedToken);
       const currentTime = Date.now() / 1000;
       if (payload.exp && payload.exp < currentTime) {
         localStorage.clear();
@@ -191,31 +199,6 @@ export class RestApiService {
     localStorage.clear();
   }
 
-  // public async getAllUsers() {
-
-  //   const url = `${urlApi}/users`;
-  //   const headers = new HttpHeaders({
-  //     'Content-Type': 'application/json',
-  //     'Authorization': `Bearer ${this.token}`
-  //   });
-
-  //   try {
-  //     this.allUsers = await this.http.get(url, { headers }).toPromise() as user[];
-  //   } catch (error) {
-  //     Swal.fire(this.translateService.instant('error400'));
-  //   }
-  // }
-
-  // public async getCurrentUser() {
-  //   try {
-  //     await this.getAllUsers();
-  //     return this.allUsers.filter((value: user) => value.login === this.currentLogin)[0];
-  //   } catch (error) {
-  //     this.swalService.error(this.translateService.instant('error400'));
-  //     return undefined;
-  //   }
-  // }
-
   public async getAllTasksInBoard() {
     try {
       const idBoard = this.openBoardService.getId();
@@ -261,9 +244,6 @@ export class RestApiService {
   }
 
   public async changeUserInfo(userName: string, userLogin: string, userPassword: string) {
-    // const currentUser = await this.getCurrentUser();
-    // let url = '';
-    // if (currentUser !== undefined)
     const url = `${urlApi}/users/${this.currentId}`;
     const userData = {
       name: userName,
@@ -274,14 +254,15 @@ export class RestApiService {
     this.changeAllUsersBoards();
   }
 
-  public createBoard(title: string) {
+  public async createBoard(title: string) {
     const url = `${urlApi}/boards`;
     const userData = {
       "title": title,
       "owner": this.currentLogin,
       "users": this.currentLogin
     };
-    this.httpRequests(url, userData, 'post', this.translateService.instant('successBoard'));
+    await this.httpRequests(url, userData, 'post', this.translateService.instant('successBoard'));
+    await this.getAllBoards();
   }
 
   public async deleteBoard(id: string) {

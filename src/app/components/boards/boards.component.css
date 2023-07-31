@@ -1,6 +1,6 @@
 .boards {
-    margin: 20px 30px;
-    min-height: 74vh;
+    margin: 0px 30px;
+    min-height: 80vh;
 }
 
 h2 {
@@ -58,6 +58,22 @@ p {
     cursor: pointer;
 }
 
+.headerBoard{
+    display: flex;
+    justify-content:space-between;
+}
+
+.headerBoard input{
+    display: block;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    font-size: 18px;
+    width: 280px;
+    height: 30px;
+    margin-top: 30px;
+    margin-bottom: 5px;
+}
+
 @media (max-width: 900px) {
 
     .boards {
@@ -95,6 +111,17 @@ p {
     .board {
         padding: 10px;
     }
+
+    .headerBoard input{
+        margin-top: 0px;
+    }
+}
+
+@media (max-width: 600px) {
+    .headerBoard{
+        flex-direction: column;
+        gap: 10px;
+    }
 }
 
 @media (max-width: 450px) {
@@ -108,4 +135,5 @@ p {
         width: 80%;
         height: 40px;
     }
+
 }

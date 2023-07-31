@@ -1,7 +1,10 @@
 <div class="boards">
-    <h2>{{ "myBoards" | translate}}</h2>
+    <div class="headerBoard">
+        <h2>{{ "myBoards" | translate}}</h2>
+        <input type="text" [(ngModel)]="searchText" (input)="searchBoard()" placeholder="{{ 'searchBoard' | translate }}">
+    </div>
     <div class="boardsGrid">
-        <div (click)="openBoard(item._id, item.title)" class="board" *ngFor="let item of restapiservice.allBoards"
+            <div (click)="openBoard(item._id, item.title)" class="board" *ngFor="let item of filteredDataArray" 
             [id]="item._id">
             <h3>{{ item.title }}</h3>
             <hr>

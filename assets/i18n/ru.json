@@ -67,6 +67,5 @@
   "successTaskChange": "Задача успешно изменена",
   "enterAllFields": "Заполните все поля",
   "successColumnTitleChange": "Заголок колонки успешно изменен",
-  "successTitleChange": "Заголок успешно изменен",
-  "searchBoard": "Поиск доски"
+  "successTitleChange": "Заголок успешно изменен"
 }

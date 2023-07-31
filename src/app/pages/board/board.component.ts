@@ -4,29 +4,7 @@ import { RestApiService } from 'src/app/services/restapi.service';
 import { TranslateService } from '@ngx-translate/core';
 import { OpenBoardService } from 'src/app/services/open-board.service';
 import { SwalService } from 'src/app/services/swal.service';
-
-interface board {
-  "_id": string,
-  "title": string,
-  "owner": string,
-  "users": [
-    string
-  ]
-};
-
-interface task
-  {
-    "_id": string,
-    "title": string,
-    "order": string,
-    "boardId": string,
-    "columnId": string,
-    "description": string,
-    "userId": string,
-    "users": [
-      string
-    ]
-  };
+import { task } from '../../interfaces/interfaces';
 
 @Component({
   selector: 'app-board',
