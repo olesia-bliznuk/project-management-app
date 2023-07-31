@@ -42,7 +42,6 @@ export class RestApiService {
           if (textMsg) this.swalService.success(textMsg);
           if (userInfo) {
             this.currentLogin = data.login;
-            localStorage.setItem("login", data.login);
           }
           break;
         case 'delete':
@@ -252,6 +251,7 @@ export class RestApiService {
     };
     await this.httpRequests(url, userData, 'put', this.translateService.instant('changeInfoOk'), true);
     this.changeAllUsersBoards();
+    this.signIn(userLogin, userPassword);
   }
 
   public async createBoard(title: string) {
